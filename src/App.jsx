@@ -12,7 +12,7 @@ const CreditCards = lazy(() => import('./pages/creditcards'));
 const Settings = lazy(() => import('./pages/settings'));
 const Loans = lazy(() => import('./pages/loans'));
 const Services = lazy(() => import('./pages/services'));
-const Privileges = lazy(() => import('./pages/Privileges'));
+const Privileges = lazy(() => import('./pages/privileges'));
 const ErrorFallback = ({ error, resetErrorBoundary }) => (
   <div role="alert">
     <p>Something went wrong: {error.message}</p>
