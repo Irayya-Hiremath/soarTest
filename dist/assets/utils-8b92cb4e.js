@@ -1,1 +1,0 @@
-const t=JSON.stringify,i=JSON.parse;function o(e,n){typeof window<"u"&&window.localStorage.setItem(e,t(n))}function r(e){if(typeof window<"u"&&window.localStorage.getItem(e)!=="undefined")return i(window.localStorage.getItem(e))}function d(e){return e.replace(/(\d{4})\s?(\d{4})\s?(\d{4})\s?(\d{4})/,"$1 **** **** $4")}export{d as m,r,o as w};
