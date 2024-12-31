@@ -29,7 +29,6 @@ function remove(key) {
   }
 }
 function maskCardNumber(cardNumber) {
-    // Ensure the card number is in a proper format
     return cardNumber.replace(/(\d{4})\s?(\d{4})\s?(\d{4})\s?(\d{4})/, '$1 **** **** $4');
   }
 export { write, read, remove, readAsync,maskCardNumber  }

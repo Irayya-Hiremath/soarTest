@@ -1,28 +1,10 @@
 import { Link } from 'react-router-dom';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
-import LogoIcon from '../../images/logo/logo-icon.svg';
 import { Icon } from '@iconify/react';
-import { readAsync,write } from '../Utility/utils';
-import UserOne from '../../images/user/user-01.png';
-import { useEffect } from 'react';
-const Header = (props) => {
-const userData=readAsync('formData')
-  useEffect(()=>{
-    const initialData={name: 'Irayya',
-    userName: 'Veer',
-    userProfile: UserOne,
-    email: 'ihiremath1991@gmail.com',
-    password: '12345',
-    dateOfBirth: '30/06/1991',
-    presentAddress: 'Gokul Road Hubali',
-    permanentAddress: 'Gokul Road Hubali',
-    city: 'Hubali',
-    postalCode: '580030',
-    country: 'India',}
-    write('formData', initialData);
 
-  },[])
+const Header = (props) => {
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
