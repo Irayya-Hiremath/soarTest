@@ -29,7 +29,7 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000); // Simulate loading state
+    setTimeout(() => setLoading(false), 1000); 
   }, []);
 
   return loading ? (
@@ -118,7 +118,7 @@ function App() {
             path="/privileges"
             element={
               <>
-                <PageTitle title="privilages" />
+                <PageTitle title="privileges" />
                 <Privileges />
               </>
             }
