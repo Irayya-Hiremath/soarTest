@@ -1,163 +1,60 @@
-// import React from 'react'
 
-// export default function Accounts() {
-//   return (
-//     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-// Accounts</div>
-//   )
-// }
+import React from 'react';
+import { users } from '../../components/Utility/dummyData';
 
-import React, { useState, useEffect } from 'react';
-import ApexCharts from 'apexcharts';
-
-function Accounts() {
-  const [weeklyData, setWeeklyData] = useState([]);
-  const [expenseData, setExpenseData] = useState([]);
-
-  useEffect(() => {
-    // Sample data (replace with your actual data)
-    const fetchData = async () => {
-      const weeklyData = [
-        { x: 'Sat', y: 200 },
-        { x: 'Sun', y: 100 },
-        { x: 'Mon', y: 300 },
-        { x: 'Tue', y: 400 },
-        { x: 'Wed', y: 200 },
-        { x: 'Thu', y: 300 },
-        { x: 'Fri', y: 400 },
-      ];
-
-      const expenseData = [
-        { x: 'Entertainment', y: 30 },
-        { x: 'Bill Expense', y: 15 },
-        { x: 'Investment', y: 20 },
-        { x: 'Others', y: 35 },
-      ];
-
-      setWeeklyData(weeklyData);
-      setExpenseData(expenseData);
-    };
-
-    fetchData();
-  }, []);
-
-  function weeklyChartOptions() {
-    return {
-      chart: {
-        type: 'bar',
-        height: 350,
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: '55%',
-          endingShape: 'rounded',
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent'],
-      },
-      xaxis: {
-        categories: weeklyData.map((item) => item.x),
-      },
-      yaxis: {
-        title: {
-          text: 'Amount',
-        },
-      },
-      fill: {
-        opacity: 1,
-      },
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return val + ' USD';
-          },
-        },
-      },
-    };
-  }
-
-  function expenseChartOptions() {
-    return {
-      chart: {
-        type: 'donut',
-        width: 380,
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                show: true,
-                label: 'Total',
-              },
-            },
-          },
-        },
-      },
-      labels: expenseData.map((item) => item.x),
-      dataLabels: {
-        enabled: true,
-        formatter: (val) => val + '%',
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
-    };
-  }
-
-  const weeklyChartData = [
-    {
-      name: 'Deposit',
-      data: weeklyData.map((item) => item.y),
-    },
-    {
-      name: 'Withdraw',
-      data: [500, 300, 300, 500, 200, 300, 400], // Replace with actual withdraw data
-    },
-  ];
-
-  const expenseChartData = expenseData.map((item) => item.y);
-
+export default function Accounts() {
   return (
-    <div className="flex">
-      <div className="w-1/2 p-4 border-r">
-        <h2 className="text-xl font-bold mb-4">Weekly Activity</h2>
-        <ApexCharts
-          options={weeklyChartOptions()} // Call the function to get options
-          series={weeklyChartData}
-          type="bar"
-          height={350}
-        />
-      </div>
-      <div className="w-1/2 p-4">
-        <h2 className="text-xl font-bold mb-4">Expense Statistics</h2>
-        <ApexCharts
-          options={expenseChartOptions}
-          series={expenseChartData}
-          type="donut"
-          width={380}
-        />
+    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+
+      <div className="flex flex-col">
+        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <div className="hidden p-2.5 text-center sm:block xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">ID</h5>
+          </div>
+          <div className="p-2.5 xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">Image</h5>
+          </div>
+          <div className="p-2.5 text-center xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">Name</h5>
+          </div>
+          <div className="p-2.5 text-center xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">Role</h5>
+          </div>
+       
+        </div>
+
+        {users?.map((user, key) => (
+          <div
+            className={`grid grid-cols-3 sm:grid-cols-5 ${
+              key === users.length - 1
+                ? ''
+                : 'border-b border-stroke dark:border-strokedark'
+            }`}
+            key={user.id}
+          >    <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+          <p className="text-black dark:text-white">{user?.id}</p>
+        </div>
+            <div className="flex items-center gap-3 p-2.5 xl:p-5">
+              <img
+                src={user?.img}
+                alt={user?.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+            </div>
+
+            <div className="flex items-center justify-center p-2.5 xl:p-5">
+              <p className="text-black dark:text-white">{user?.name}</p>
+            </div>
+
+            <div className="flex items-center justify-center p-2.5 xl:p-5">
+              <p className="text-meta-3">{user?.role}</p>
+            </div>
+
+        
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default Accounts;

@@ -1,10 +1,28 @@
 import { Link } from 'react-router-dom';
-import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 import LogoIcon from '../../images/logo/logo-icon.svg';
-
+import { Icon } from '@iconify/react';
+import { readAsync,write } from '../Utility/utils';
+import UserOne from '../../images/user/user-01.png';
+import { useEffect } from 'react';
 const Header = (props) => {
+const userData=readAsync('formData')
+  useEffect(()=>{
+    const initialData={name: 'Irayya',
+    userName: 'Veer',
+    userProfile: UserOne,
+    email: 'ihiremath1991@gmail.com',
+    password: '12345',
+    dateOfBirth: '30/06/1991',
+    presentAddress: 'Gokul Road Hubali',
+    permanentAddress: 'Gokul Road Hubali',
+    city: 'Hubali',
+    postalCode: '580030',
+    country: 'India',}
+    write('formData', initialData);
+
+  },[])
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
@@ -55,10 +73,10 @@ const Header = (props) => {
   
         </div>
 
-        <div className="hidden sm:block">
+        <div className="hidden sm:block  ml-auto mx-4">
           <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">
-              <button className="absolute left-0 top-1/2 -translate-y-1/2">
+              <button className="absolute mx-2 left-0 top-1/2 -translate-y-1/2">
                 <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
                   width="20"
@@ -82,33 +100,38 @@ const Header = (props) => {
                 </svg>
               </button>
 
-              <input
+            
+                
+                <input
                 type="text"
-                placeholder="Type to search..."
-                className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125 border"
+                id="name"
+                name="name"
+              placeholder="Search for something ..."
+                className="mt-1 px-12 p-2 w-full border rounded-xl outline-[#DFEAF2] focus:ring-[#DFEAF2] focus:border-[#DFEAF2]"
               />
+            
             </div>
           </form>
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
-            {/* <!-- Dark Mode Toggler --> */}
-            {/* <DarkModeSwitcher /> */}
-            {/* <!-- Dark Mode Toggler --> */}
-
-            {/* <!-- Notification Menu Area --> */}
+      
             <DropdownNotification />
-            {/* <!-- Notification Menu Area --> */}
+            <Link
+         
+          to="/settings"
+          className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+        >
 
-            {/* <!-- Chat Notification Area --> */}
-            <DropdownMessage />
-            {/* <!-- Chat Notification Area --> */}
+<Icon style={{height:'20px',width:'20px'}} icon="lets-icons:setting-line" />
+
+        </Link>
+            
+            {/* <DropdownMessage /> */}
           </ul>
 
-          {/* <!-- User Area --> */}
           <DropdownUser />
-          {/* <!-- User Area --> */}
         </div>
       </div>
     </header>

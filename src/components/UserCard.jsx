@@ -2,23 +2,11 @@
 
 import React, { useState } from "react";
 
-import UserOne from '../images/user/user-01.png';
-import UserTwo from '../images/user/user-02.png';
-import UserThree from '../images/user/user-03.png';
-import UserFour from '../images/user/user-04.png';
-import UserFive from '../images/user/user-05.png';
-import UserSix from '../images/user/user-06.png';
 import { Icon } from '@iconify/react';
+import { users } from "./Utility/dummyData";
 
 const UserCard = () => {
-  const users = [
-    { id: 1, name: "Livia Bator", role: "CEO", img:UserOne },
-    { id: 2, name: "Randy Press", role: "Director", img:UserTwo},
-    { id: 3, name: "Workman", role: "Designer", img:UserThree },
-    { id: 4, name: "Workman", role: "Designer", img: UserFour },
-    { id: 5, name: "Workman", role: "Designer", img: UserFive },
-    { id: 6, name: "Workman", role: "Developer", img: UserSix },
-  ];
+
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [scrollIndex, setScrollIndex] = useState(0);
@@ -39,7 +27,7 @@ const UserCard = () => {
   };
 
   return (
-    <div className="border lg:w-[445px] md:w-[445px] p-4 bg-white  rounded-lg shadow-md">
+    <div className="border lg:w-[445px] md:w-[445px] max-h-[276px] p-4 bg-white  rounded-lg shadow-md">
       <div className="flex  items-center space-x-4 ">
      
           {scrollIndex > 0 && (
@@ -54,9 +42,9 @@ const UserCard = () => {
       )}
       
       
-        {users.slice(scrollIndex, scrollIndex + 3).map((user) => (
+        {users?.slice(scrollIndex, scrollIndex + 3).map((user) => (
           <div
-            key={user.id}
+            key={user?.id}
             onClick={() => handleSelectUser(user.id)}
             className=' flex-col h-[127px] items-center cursor-pointer '
             
@@ -72,18 +60,18 @@ const UserCard = () => {
             >{user.role}</p>
           </div>
         ))}
+        
+           
+        {scrollIndex + 3 < users?.length && (
         <div
         
-          className=" h-[50px] cursor-pointer flex justify-center items-center w-[50px] bg-[#FFFFFF] shadow-xl rounded-full hover:bg-gray-300"
-        >
-           
-        {scrollIndex + 3 < users.length && (
-        
+        className=" h-[50px] cursor-pointer flex justify-center items-center w-[50px] bg-[#FFFFFF] shadow-xl rounded-full hover:bg-gray-300"
+      >
             <Icon  onClick={handleNext} style={{height:'25px',width:'25px',}} icon="material-symbols-light:arrow-forward" />
+            </div>
 
         )}
         
-        </div>
       </div>
 
         <div className="flex justify-between content-center items-center mt-2">

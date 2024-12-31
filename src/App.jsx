@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-
+import { ErrorBoundary } from 'react-error-boundary';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import DefaultLayout from './layout/DefaultLayout';
@@ -13,6 +13,13 @@ const Settings = lazy(() => import('./pages/settings'));
 const Loans = lazy(() => import('./pages/loans'));
 const Services = lazy(() => import('./pages/services'));
 const Privileges = lazy(() => import('./pages/Privileges'));
+const ErrorFallback = ({ error, resetErrorBoundary }) => (
+  <div role="alert">
+    <p>Something went wrong: {error.message}</p>
+    <button onClick={resetErrorBoundary}>Try Again</button>
+  </div>
+);
+
 function App() {
   const [loading, setLoading] = useState(true);
   const { pathname } = useLocation();
@@ -22,13 +29,14 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(() => setLoading(false), 1000); // Simulate loading state
   }, []);
 
   return loading ? (
     <Loader />
   ) : (
     <DefaultLayout>
+       <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
@@ -118,6 +126,7 @@ function App() {
           
         </Routes>
       </Suspense>
+      </ErrorBoundary>
     </DefaultLayout>
   );
 }

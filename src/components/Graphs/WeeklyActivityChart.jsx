@@ -20,18 +20,7 @@ ChartJS.register(
   Legend
 );
 
-// export const options = {
-//   responsive: true,
-//   plugins: {
-//     legend: {
-//       position: 'top' ,
-//     },
-//     title: {
-//       display: true,
-//     //   text: 'Chart.js Bar Chart',
-//     },
-//   },
-// };
+
 
 export const options = {
     responsive: true,
@@ -112,7 +101,7 @@ export const data = {
 export default function ExpenseChart() {
 
   return (
-  <div className='bg-white p-6 rounded-xl shadow-sm '>
+  <div className='bg-white lg:h-[322px] p-6 rounded-xl shadow-sm '>
     <Bar options={options} data={data} />
     </div>)
 }

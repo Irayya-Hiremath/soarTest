@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from '../../images/logo/logo.svg';
 import { Icon } from '@iconify/react';
+import navigation from '../Utility/navigation';
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
@@ -9,56 +9,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
-  const navigation = [
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="mdi-light:home" />,
-      name: 'Dashboard',
-      path: '/home',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="fa-solid:file-invoice-dollar" />,
-      name: 'Transactions',
-      path: '/transactions',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="mdi:account" />,
-      name: 'Accounts',
-      path: '/accounts',
-    },
-
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="streamline:investment-selection-solid" />,
-      name: 'Investments',
-      path: '/investments',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="hugeicons:repair" />,
-      name: 'Services',
-      path: '/services',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="hugeicons:save-money-pound"  />,
-      name: 'Loans',
-      path: '/loans',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="material-symbols:settings" />,
-      name: 'Settings',
-      path: '/settings',
-    },
-
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="hugeicons:two-factor-access" />,
-      name: 'My Privileges',
-      path: '/privileges',
-    },
-    {
-      icon: <Icon style={{height:'25px',width:'25px'}} icon="hugeicons:two-factor-access" />,
-      name: 'test',
-      path: '/Dashboard/ECommerce',
-    },
-  ];
-
+  
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
@@ -109,7 +60,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 ">
         <NavLink style={{display:'flex', justifyContent:'center' ,justifyItems:'center', textAlign:'center' }} to="/">
-          {/* <img src={Logo} alt="Logo" /> */}
           <Icon style={{height:'32px',width:'25px' ,color:'#232323'}} icon="mingcute:task-fill"  />
           <p className='mx-2 text-2xl font-bold text-heading '>Soar Task</p>
         </NavLink>
@@ -137,18 +87,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 
-      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear border border-red-800 ">
-        <nav className="py-4 px-4 lg:px-6 ">
+      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+        <nav className=" ">
           <ul className='w-full'>
             {navigation?.map((navItem) => (
-              <li key={navItem.path} className='border border-red-400 w-full'>
+              <li key={navItem.path} className={`h-full w-full ${
+                pathname.includes(navItem.path)
+                  ? ' border-l-6 border-[#232323]'
+                  : 'border-none' 
+              }`}>
                 <NavLink
                   to={navItem.path}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium bg-white duration-300 ease-in-out my-4
     ${
       pathname.includes(navItem.path)
-        ? 'text-darkText border-l-8 border-[#232323]' // Selected state: dark text, thick left border
-        : 'text-lightText' // Default state: light text, no border
+        ? 'text-darkText '
+        : 'text-lightText' 
     }`}
                 >
                   {navItem.icon}

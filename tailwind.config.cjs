@@ -6,6 +6,17 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
+    extend: {
+      animation: {
+        fadeIn: "fadeIn 0.3s ease-in-out",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+      },
+    },
     fontFamily: {
       satoshi: ['Satoshi', 'sans-serif'],
     },
