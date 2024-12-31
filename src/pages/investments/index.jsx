@@ -1,6 +1,6 @@
-
-import React from "react";
-import { cardsData } from "../../components/Utility/dummyData";
+import React from 'react';
+import { cardsData } from '../../components/Utility/dummyData';
+import { maskCardNumber } from '../../components/Utility/utils';
 
 export default function Investments() {
   return (
@@ -27,15 +27,14 @@ export default function Investments() {
               Valid Thru
             </h5>
           </div>
-        
         </div>
 
         {cardsData?.map((card, key) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-5 ${
               key === cardsData.length - 1
-                ? ""
-                : "border-b border-stroke dark:border-strokedark"
+                ? ''
+                : 'border-b border-stroke dark:border-strokedark'
             }`}
             key={key}
           >
@@ -47,13 +46,12 @@ export default function Investments() {
             </div>
             <div className="flex items-center justify-center p-2.5 xl:p-5">
               <p className="text-black dark:text-white">
-                {card?.cardNumber}
+                {maskCardNumber(card?.cardNumber)}
               </p>
             </div>
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white">{card?.validThru}</p>
             </div>
-        
           </div>
         ))}
       </div>

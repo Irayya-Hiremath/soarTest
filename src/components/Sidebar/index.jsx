@@ -9,13 +9,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
-  
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
   );
 
-  // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!sidebar.current || !trigger.current) return;
@@ -31,7 +29,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-  // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
       if (!sidebarOpen || keyCode !== 27) return;
@@ -59,9 +56,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 ">
-        <NavLink style={{display:'flex', justifyContent:'center' ,justifyItems:'center', textAlign:'center' }} to="/">
-          <Icon style={{height:'32px',width:'25px' ,color:'#232323'}} icon="mingcute:task-fill"  />
-          <p className='mx-2 text-2xl font-bold text-heading '>Soar Task</p>
+        <NavLink
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            justifyItems: 'center',
+            textAlign: 'center',
+          }}
+          to="/"
+        >
+          <Icon
+            style={{ height: '32px', width: '25px', color: '#232323' }}
+            icon="mingcute:task-fill"
+          />
+          <p className="mx-2 text-2xl font-bold text-heading ">Soar Task</p>
         </NavLink>
         <button
           ref={trigger}
@@ -89,21 +97,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <nav className=" ">
-          <ul className='w-full'>
+          <ul className="w-full">
             {navigation?.map((navItem) => (
-              <li key={navItem.path} className={`h-full w-full ${
-                pathname.includes(navItem.path)
-                  ? ' border-l-6 border-[#232323]'
-                  : 'border-none' 
-              }`}>
+              <li
+                key={navItem.path}
+                className={`h-full w-full ${
+                  pathname.includes(navItem.path)
+                    ? ' border-l-6 border-[#232323]'
+                    : 'border-none'
+                }`}
+              >
                 <NavLink
                   to={navItem.path}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium bg-white duration-300 ease-in-out my-4
-    ${
-      pathname.includes(navItem.path)
-        ? 'text-darkText '
-        : 'text-lightText' 
-    }`}
+    ${pathname.includes(navItem.path) ? 'text-darkText ' : 'text-lightText'}`}
                 >
                   {navItem.icon}
                   {navItem.name}

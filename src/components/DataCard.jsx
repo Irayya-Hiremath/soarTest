@@ -23,7 +23,6 @@ export default function DataCard({
           <p className="text-2xl font-semibold">{balance}</p>
         </div>
         <div className=" w-[35px] h-[35px] rounded-sm">
-          {/* <div className=" bg-gray-600 rounded-full"></div> */}
           <img
             src={isDark ? Chip2 : Chip}
             alt="chip image"
